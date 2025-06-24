@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Financeira Diária</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gestão Financeira Diária</h1>
+        </header>
+
+        <section class="calendar-navigation">
+            <button id="prevDayBtn" class="nav-btn">&lt;</button>
+            <div id="calendarDays" class="calendar-days">
+                </div>
+            <button id="nextDayBtn" class="nav-btn">&gt;</button>
+        </section>
+
+        <h2 id="currentDateDisplay" class="current-date-display"></h2>
+
+        <section class="summary-card">
+            <h3>Resumo Financeiro do Dia</h3>
+            <div class="summary-item">
+                <span>Total Receitas:</span>
+                <span id="salarioTotalDisplay" class="total-value green">R$ 0,00</span>
+            </div>
+            <div class="summary-item">
+                <span>Total Gastos:</span>
+                <span id="totalGastosDisplay" class="total-value red">R$ 0,00</span>
+            </div>
+            <div class="summary-item">
+                <span>Total Investimentos:</span>
+                <span id="totalInvestimentosDisplay" class="total-value blue">R$ 0,00</span>
+            </div>
+            <div class="summary-item total">
+                <span>Saldo Final:</span>
+                <span id="saldoFinalDisplay" class="total-value">R$ 0,00</span>
+            </div>
+            <button id="finalizeDayBtn" class="btn primary-btn">Finalizar Dia</button>
+            <button class="btn secondary-btn edit-fixed-btn" onclick="openFixedExpenseModal()">Editar Gastos Fixos</button>
+        </section>
+
+        <section class="kanban-board">
+            <div class="card-column">
+                <div class="card-header green">
+                    <h3>Receitas</h3>
+                    <button class="add-card-btn" onclick="openModal('receita')">+</button>
+                </div>
+                <div id="receitasList" class="card-list">
+                    </div>
+            </div>
+
+            <div class="card-column">
+                <div class="card-header red">
+                    <h3>Gastos</h3>
+                    <button class="add-card-btn" onclick="openModal('gasto')">+</button>
+                </div>
+                <div id="gastosList" class="card-list">
+                    </div>
+            </div>
+
+            <div class="card-column">
+                <div class="card-header blue">
+                    <h3>Investimentos</h3>
+                    <button class="add-card-btn" onclick="openModal('investimento')">+</button>
+                </div>
+                <div id="investimentosList" class="card-list">
+                    </div>
+            </div>
+        </section>
+
+        <div id="itemModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h2 id="modalTitle">Adicionar Item</h2>
+                <form id="itemForm">
+                    <div class="form-group">
+                        <label for="itemDescription">Descrição:</label>
+                        <input type="text" id="itemDescription" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemValue">Valor (R$):</label>
+                        <input type="number" id="itemValue" step="0.01" required>
+                    </div>
+                    <div id="gastoTypeSection" class="form-group" style="display: none;">
+                        <label>Tipo de Gasto:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="gastoFixo" name="gastoType" value="Fixo" checked>
+                            <label for="gastoFixo">Fixo</label>
+                            <input type="radio" id="gastoVariavel" name="gastoType" value="Variável">
+                            <label for="gastoVariavel">Variável</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="welcomeFixedExpenseModal" class="modal">
+            <div class="modal-content large-modal">
+                <span class="close-btn" onclick="closeFixedExpenseModal()">&times;</span>
+                <h2>Bem-vindo(a) à Gestão Financeira!</h2>
+                <p>Para começar, cadastre seus gastos fixos mensais (aluguel, internet, etc.). Eles serão automaticamente adicionados aos seus dias.</p>
+
+                <div class="fixed-expense-setup">
+                    <div class="add-fixed-expense">
+                        <h3>Adicionar Gasto Fixo</h3>
+                        <form id="fixedExpenseForm">
+                            <div class="form-group">
+                                <label for="fixedExpenseDescription">Descrição:</label>
+                                <input type="text" id="fixedExpenseDescription" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fixedExpenseValue">Valor (R$):</label>
+                                <input type="number" id="fixedExpenseValue" step="0.01" required>
+                            </div>
+                            <button type="submit" class="btn primary-btn">Adicionar Gasto Fixo</button>
+                        </form>
+                    </div>
+
+                    <div class="current-fixed-expenses">
+                        <h3>Meus Gastos Fixos</h3>
+                        <div id="initialFixedExpensesList" class="card-list">
+                            </div>
+                    </div>
+                </div>
+                <button id="finishFixedExpensesSetupBtn" class="btn primary-btn large-btn">Concluir e Ir para o Programa</button>
+            </div>
+        </div>
+
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeAuthModal()">&times;</span>
+                <h2 id="authModalTitle"></h2>
+                <form id="authForm">
+                    <div class="form-group">
+                        <label for="username">Usuário:</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" id="authSubmitBtn" class="btn primary-btn"></button>
+                </form>
+                <p class="auth-toggle-text">
+                    <span id="toggleAuthMode"></span>
+                </p>
+            </div>
+        </div>
+
+        <div class="user-info">
+            Bem-vindo(a), <span id="loggedInUsername"></span>!
+            <button class="btn secondary-btn" onclick="logout()">Sair</button>
+            <button class="btn secondary-btn" onclick="openAuthModal('register')">Trocar/Adicionar Conta</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
