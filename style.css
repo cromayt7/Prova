@@ -511,7 +511,6 @@ h3 {
         opacity: 0;
         transform: translateY(-20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -568,36 +567,4 @@ h3 {
         height: 35px;
         font-size: 1.2em;
     }
-}
-
-.user-info {
-    text-align: right;
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    color: #4a6c8e;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.user-info .btn {
-    padding: 8px 15px;
-    font-size: 0.9em;
-}
-
-.auth-toggle-text {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 0.95em;
-}
-
-.auth-toggle-text a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.auth-toggle-text a:hover {
-    text-decoration: underline;
 }
