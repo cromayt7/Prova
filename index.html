@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão Financeira Diária</title>
     <link rel="stylesheet" href="style.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -130,33 +130,6 @@
                 </div>
                 <button id="finishFixedExpensesSetupBtn" class="btn primary-btn large-btn">Concluir e Ir para o Programa</button>
             </div>
-        </div>
-
-        <div id="authModal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeAuthModal()">&times;</span>
-                <h2 id="authModalTitle"></h2>
-                <form id="authForm">
-                    <div class="form-group">
-                        <label for="username">Usuário:</label>
-                        <input type="text" id="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Senha:</label>
-                        <input type="password" id="password" required>
-                    </div>
-                    <button type="submit" id="authSubmitBtn" class="btn primary-btn"></button>
-                </form>
-                <p class="auth-toggle-text">
-                    <span id="toggleAuthMode"></span>
-                </p>
-            </div>
-        </div>
-
-        <div class="user-info">
-            Bem-vindo(a), <span id="loggedInUsername"></span>!
-            <button class="btn secondary-btn" onclick="logout()">Sair</button>
-            <button class="btn secondary-btn" onclick="openAuthModal('register')">Trocar/Adicionar Conta</button>
         </div>
     </div>
     <script src="script.js"></script>
